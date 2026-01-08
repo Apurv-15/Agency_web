@@ -4,6 +4,7 @@ import { useGSAP } from "@gsap/react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useRef } from "react";
+import { WordReveal } from "@/components/ui/word-reveal";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -80,27 +81,39 @@ export function FullscreenFeature() {
                 </div>
 
                 {/* Main heading */}
-                <h2
-                    ref={headingRef}
-                    className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 leading-[1.1]"
+                <WordReveal
+                    baseOpacity={0}
+                    blurStrength={10}
+                    baseRotation={5}
                 >
-                    <span className="bg-gradient-to-r from-white via-violet-200 to-white bg-clip-text text-transparent">
-                        Intelligence
-                    </span>
-                    <br />
-                    <span className="bg-gradient-to-r from-violet-400 via-indigo-400 to-violet-400 bg-clip-text text-transparent">
-                        Meets Innovation
-                    </span>
-                </h2>
+                    <h2
+                        ref={headingRef}
+                        className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 leading-[1.1]"
+                    >
+                        <span className="bg-gradient-to-r from-white via-violet-200 to-white bg-clip-text text-transparent">
+                            Intelligence
+                        </span>
+                        <br />
+                        <span className="bg-gradient-to-r from-violet-400 via-indigo-400 to-violet-400 bg-clip-text text-transparent">
+                            Meets Innovation
+                        </span>
+                    </h2>
+                </WordReveal>
 
                 {/* Subheading */}
-                <p
-                    ref={subheadingRef}
-                    className="text-lg md:text-xl lg:text-2xl text-gray-400 max-w-3xl mx-auto mb-8 leading-relaxed"
+                <WordReveal
+                    baseOpacity={0.2}
+                    blurStrength={6}
+                    baseRotation={2}
                 >
-                    We transform complex challenges into elegant solutions through
-                    cutting-edge AI automation and strategic insights.
-                </p>
+                    <p
+                        ref={subheadingRef}
+                        className="text-lg md:text-xl lg:text-2xl text-gray-400 max-w-3xl mx-auto mb-8 leading-relaxed"
+                    >
+                        We transform complex challenges into elegant solutions through
+                        cutting-edge AI automation and strategic insights.
+                    </p>
+                </WordReveal>
 
                 {/* Stats row */}
                 <div

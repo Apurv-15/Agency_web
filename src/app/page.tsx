@@ -27,7 +27,7 @@ export default function Home() {
       >
         <Navbar />
         <InfiniteHero />
-        <FullscreenFeature />
+        {/* <FullscreenFeature /> */}
         <Services />
         <Projects />
         <SocialProof />

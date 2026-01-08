@@ -3,10 +3,11 @@
 import { ScrollReveal } from "@/components/ui/scroll-reveal";
 import { GlowCard } from "@/components/ui/animated-components";
 import Image from "next/image";
+import { WordReveal } from "@/components/ui/word-reveal";
 
 export function Services() {
     return (
-        <section className="py-32 bg-black relative overflow-hidden">
+        <section className="py-32 relative overflow-hidden" style={{ backgroundColor: '#0a0e27' }}>
             {/* Background glow effects */}
             <div className="absolute top-0 left-1/4 w-96 h-96 bg-violet-600/20 rounded-full blur-[128px]" />
             <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-indigo-600/20 rounded-full blur-[128px]" />
@@ -14,13 +15,15 @@ export function Services() {
             <div className="container mx-auto px-6 relative z-10">
                 {/* Strategy & Content Creation Section */}
                 <ScrollReveal className="text-center mb-16">
-                    <div className="inline-block mb-4">
-                        <div className="h-px w-24 bg-gradient-to-r from-transparent via-violet-500 to-transparent inline-block mr-4" />
-                        <h2 className="text-4xl md:text-5xl font-bold inline-block bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent">
-                            Strategy & Content Creation
-                        </h2>
-                        <div className="h-px w-24 bg-gradient-to-r from-transparent via-violet-500 to-transparent inline-block ml-4" />
-                    </div>
+                    <WordReveal>
+                        <div className="inline-block mb-4">
+                            <div className="h-px w-24 bg-gradient-to-r from-transparent via-violet-500 to-transparent inline-block mr-4" />
+                            <h2 className="text-4xl md:text-5xl font-bold inline-block text-white">
+                                Strategy & Content Creation
+                            </h2>
+                            <div className="h-px w-24 bg-gradient-to-r from-transparent via-violet-500 to-transparent inline-block ml-4" />
+                        </div>
+                    </WordReveal>
                 </ScrollReveal>
 
                 <ScrollReveal className="grid md:grid-cols-2 gap-6 mb-32 max-w-6xl mx-auto" stagger={0.2}>
@@ -59,7 +62,7 @@ export function Services() {
 
                 {/* AI Automation Services - Bento Grid */}
                 <ScrollReveal className="mb-16">
-                    <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent">
+                    <h2 className="text-4xl md:text-5xl font-bold mb-4 text-white">
                         AI Automation Services
                     </h2>
                     <div className="grid md:grid-cols-2 gap-4 mb-8">

@@ -120,6 +120,36 @@
   html {
     scroll-behavior: smooth;
   }
+
+  /* Apple-styled headings */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", system-ui, sans-serif;
+    color: #ffffff;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+  }
+
+  h1 {
+    font-weight: 700;
+    letter-spacing: -0.03em;
+  }
+
+  h2 {
+    font-weight: 600;
+    letter-spacing: -0.025em;
+  }
+
+  h3,
+  h4 {
+    font-weight: 600;
+    letter-spacing: -0.02em;
+  }
 }
 
 @layer utilities {

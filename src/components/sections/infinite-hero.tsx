@@ -280,7 +280,8 @@ export default function InfiniteHero() {
     return (
         <div
             ref={rootRef}
-            className="relative h-svh w-full overflow-hidden bg-black text-white"
+            className="relative h-svh w-full overflow-hidden text-white"
+            style={{ backgroundColor: '#0a0e27' }}
         >
             <div className="absolute inset-0" ref={bgRef}>
                 <ShaderBackground className="h-full w-full" />

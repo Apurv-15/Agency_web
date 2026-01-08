@@ -3,6 +3,7 @@
 import { ScrollReveal } from "@/components/ui/scroll-reveal";
 import { GlowCard } from "@/components/ui/animated-components";
 import Image from "next/image";
+import { WordReveal } from "@/components/ui/word-reveal";
 
 export function Projects() {
     const projects = [
@@ -12,7 +13,7 @@ export function Projects() {
     ];
 
     return (
-        <section className="py-32 bg-black relative overflow-hidden">
+        <section className="py-32 relative overflow-hidden" style={{ backgroundColor: '#0a0e27' }}>
             {/* Background glow */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-indigo-600/10 rounded-full blur-[128px]" />
 
@@ -21,13 +22,17 @@ export function Projects() {
                     <div className="inline-block px-4 py-1.5 rounded-full border border-violet-500/30 bg-violet-500/10 mb-4">
                         <span className="text-violet-400 text-sm font-medium">✦ PROJECTS</span>
                     </div>
-                    <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent">
-                        Our Latest Projects
-                    </h2>
-                    <p className="text-lg text-gray-400 max-w-2xl">
-                        See how we turn bold ideas into automated AI solutions carefully crafted to
-                        optimize, scale, and deliver measurable results.
-                    </p>
+                    <WordReveal>
+                        <h2 className="text-4xl md:text-5xl font-bold mb-4 text-white">
+                            Our Latest Projects
+                        </h2>
+                    </WordReveal>
+                    <WordReveal>
+                        <p className="text-lg text-gray-400 max-w-2xl">
+                            See how we turn bold ideas into automated AI solutions carefully crafted to
+                            optimize, scale, and deliver measurable results.
+                        </p>
+                    </WordReveal>
                 </ScrollReveal>
 
                 <div className="grid md:grid-cols-2 gap-12 items-start max-w-6xl mx-auto">
