@@ -10,6 +10,8 @@ import { SocialProof } from "@/components/sections/social-proof";
 import { CTA } from "@/components/sections/cta";
 import { LazyLoader } from "@/components/ui/lazy-loader";
 import { FullscreenFeature } from "@/components/sections/fullscreen-feature";
+import { WhyUs } from "@/components/sections/why-us";
+import { WhyChooseUs } from "@/components/sections/why-choose-us";
 
 export default function Home() {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -36,6 +38,10 @@ export default function Home() {
         <InfiniteHero />
 
         <SocialProof />
+
+        <WhyUs />
+        <WhyChooseUs />
+
         <Services />
         {/* <FullscreenFeature /> */}
         <Projects />

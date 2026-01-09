@@ -46,7 +46,7 @@ export function LaserHeroV2() {
 
     return (
         <section
-            className={`relative h-screen w-full overflow-hidden ${inter.className}`}
+            className={`relative h-[120vh] w-full overflow-hidden ${inter.className}`}
             style={{ backgroundColor: '#060010' }}
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
