@@ -334,6 +334,8 @@ export const LaserFlow: React.FC<Props> = ({
         canvas.style.width = '100%';
         canvas.style.height = '100%';
         canvas.style.display = 'block';
+        canvas.style.transform = 'translateZ(0)';
+        canvas.style.willChange = 'transform';
         mount.appendChild(canvas);
 
         const scene = new THREE.Scene();
@@ -419,6 +421,18 @@ export const LaserFlow: React.FC<Props> = ({
         };
 
         setSizeNow();
+
+        // Force a delayed resize to ensure proper initialization after layout settles
+        const initTimeout = setTimeout(() => {
+            lastSizeRef.current = { width: 0, height: 0, dpr: 0 }; // Reset to force recalc
+            setSizeNow();
+        }, 100);
+
+        const secondInitTimeout = setTimeout(() => {
+            lastSizeRef.current = { width: 0, height: 0, dpr: 0 }; // Reset to force recalc
+            setSizeNow();
+        }, 500);
+
         const ro = new ResizeObserver(scheduleResize);
         ro.observe(mount);
 
@@ -521,7 +535,7 @@ export const LaserFlow: React.FC<Props> = ({
             (uniforms.uFogTime.value as number) += cdt;
 
             if (!hasFadedRef.current) {
-                const fadeDur = 1.0;
+                const fadeDur = 0.4;
                 fade = Math.min(1, fade + cdt / fadeDur);
                 uniforms.uFade.value = fade;
                 if (fade >= 1) hasFadedRef.current = true;
@@ -534,12 +548,14 @@ export const LaserFlow: React.FC<Props> = ({
 
             renderer.render(scene, camera);
 
-            adjustDprIfNeeded(performance.now());
+            // adjustDprIfNeeded(performance.now());
         };
 
         animate();
 
         return () => {
+            clearTimeout(initTimeout);
+            clearTimeout(secondInitTimeout);
             cancelAnimationFrame(raf);
             ro.disconnect();
             io.disconnect();

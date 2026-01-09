@@ -4,6 +4,7 @@ import dynamic from 'next/dynamic';
 import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { Inter } from 'next/font/google';
+import { motion } from 'framer-motion';
 import heroImg from '@/components/video/images/hero-illustration.7100a376.jpg';
 
 const inter = Inter({ subsets: ['latin'] });
@@ -17,7 +18,46 @@ const LaserFlow = dynamic(() => import("@/components/ui/LaserFlow"), {
     )
 });
 
-export function LaserHeroV2() {
+// Simple Typewriter component
+const Typewriter = ({ text, delay = 0, duration = 0.05, onComplete }: { text: string; delay?: number; duration?: number; onComplete?: () => void }) => {
+    return (
+        <motion.span
+            initial="hidden"
+            animate="visible"
+            variants={{
+                hidden: { opacity: 1 },
+                visible: {
+                    opacity: 1,
+                    transition: {
+                        staggerChildren: duration,
+                        delayChildren: delay,
+                    }
+                }
+            }}
+            onAnimationComplete={onComplete}
+        >
+            {text.split("").map((char, i) => (
+                <motion.span
+                    key={i}
+                    variants={{
+                        hidden: { opacity: 0, display: "none" },
+                        visible: { opacity: 1, display: "inline" }
+                    }}
+                >
+                    {char}
+                </motion.span>
+            ))}
+        </motion.span>
+    );
+};
+
+export function LaserHeroV2({
+    showBeam = true,
+    showText = true
+}: {
+    showBeam?: boolean;
+    showText?: boolean;
+}) {
     const [mounted, setMounted] = useState(false);
     const revealImgRef = useRef<HTMLDivElement>(null);
 
@@ -47,13 +87,23 @@ export function LaserHeroV2() {
     return (
         <section
             className={`relative h-[120vh] w-full overflow-hidden ${inter.className}`}
-            style={{ backgroundColor: '#060010' }}
+            style={{
+                backgroundColor: '#060010',
+                willChange: 'transform',
+                transform: 'translateZ(0)',
+                isolation: 'isolate'
+            }}
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
         >
             {/* Laser Flow Background */}
-            {mounted && (
-                <div className="absolute inset-0">
+            <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: showBeam && mounted ? 1 : 0 }}
+                transition={{ duration: 0.8 }}
+                className="absolute inset-0"
+            >
+                {mounted && (
                     <LaserFlow
                         horizontalBeamOffset={0.1}
                         verticalBeamOffset={0.0}
@@ -61,22 +111,36 @@ export function LaserHeroV2() {
                         fogIntensity={0.5}
                         wispDensity={1.2}
                     />
-                </div>
-            )}
+                )}
+            </motion.div>
 
             {/* Heading Content - Kept from V2 */}
             <div className="absolute top-0 left-0 right-0 z-20 px-6 md:px-12 lg:px-20 pt-32">
                 <div className="max-w-7xl w-full mx-auto">
-                    <div className="flex flex-col items-start text-left max-w-2xl">
-                        <h1 className="text-[clamp(3rem,6vw,6.5rem)] font-bold leading-[0.9] tracking-tight text-white mb-6">
-                            Everything App<br />
-                            for your teams
+                    <div className="flex flex-col items-start text-left max-w-xl lg:max-w-2xl">
+                        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.1] tracking-tight text-white mb-4 md:mb-6">
+                            {showText ? (
+                                <>
+                                    <Typewriter text="Softman Engineering" duration={0.04} />
+                                    <br />
+                                    <Typewriter text="Excellence" delay={0.8} duration={0.04} />
+                                </>
+                            ) : null}
                         </h1>
-                        <p className="text-lg md:text-xl text-gray-400 max-w-lg mb-8 font-light leading-relaxed">
-                            Huly, an open-source platform, serves as an all-in-one replacement of Linear, Jira, Slack, and Notion.
-                        </p>
+                        <div className="text-base md:text-lg lg:text-xl text-gray-400 max-w-md lg:max-w-lg mb-6 md:mb-8 font-light leading-relaxed">
+                            {showText ? (
+                                <Typewriter
+                                    text="We build scalable, high-performance software solutions tailored to your business needs."
+                                    delay={1.5}
+                                    duration={0.02}
+                                />
+                            ) : null}
+                        </div>
 
-                        <button
+                        <motion.button
+                            initial={{ opacity: 0, scale: 0.9 }}
+                            animate={{ opacity: showText ? 1 : 0, scale: showText ? 1 : 0.9 }}
+                            transition={{ delay: 3, duration: 0.5 }}
                             type="button"
                             className="group relative overflow-hidden bg-white hover:bg-white/90 px-8 py-3.5 text-sm font-bold text-black rounded-full transition-all duration-300 shadow-[0_0_20px_rgba(255,255,255,0.3)] hover:shadow-[0_0_35px_rgba(255,255,255,0.5)] flex items-center gap-2"
                         >
@@ -84,13 +148,16 @@ export function LaserHeroV2() {
                             <svg className="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                             </svg>
-                        </button>
+                        </motion.button>
                     </div>
                 </div>
             </div>
 
             {/* Content Box - From /laser page styling */}
-            <div
+            <motion.div
+                initial={{ opacity: 0, y: 40 }}
+                animate={{ opacity: showBeam ? 0.9 : 0, y: showBeam ? 0 : 40 }}
+                transition={{ duration: 0.8 }}
                 className="absolute left-1/2 -translate-x-1/2 z-10"
                 style={{
                     top: '50%',
@@ -116,7 +183,7 @@ export function LaserHeroV2() {
                     {/* Inner Gradient Overlay for Depth */}
                     <div className="absolute inset-0 bg-gradient-to-t from-[#060010]/80 via-transparent to-transparent pointer-events-none" />
                 </div>
-            </div>
+            </motion.div>
 
             {/* Interactive Reveal Image Overlay - From /laser page styling */}
             <div
@@ -135,7 +202,6 @@ export function LaserHeroV2() {
                     maskRepeat: 'no-repeat'
                 }}
             >
-                {/* Reveal Effect Placeholder */}
             </div>
         </section>
     );
