@@ -4,8 +4,8 @@ import { useState, useEffect } from "react";
 import { Navbar } from "@/components/ui/navbar";
 import { LaserHeroV2 } from "@/components/sections/laser-hero-v2";
 import InfiniteHero from "@/components/sections/infinite-hero";
-import { Services } from "@/components/sections/services";
-import { Projects } from "@/components/sections/projects";
+// import { Services } from "@/components/sections/services";
+// import { Projects } from "@/components/sections/projects";
 import { SocialProof } from "@/components/sections/social-proof";
 import { CTA } from "@/components/sections/cta";
 import { LazyLoader } from "@/components/ui/lazy-loader";
@@ -80,8 +80,8 @@ export default function Home() {
           <WhyUs />
           <WhyChooseUs />
           <BeamTimeline />
-          <Services />
-          <Projects />
+          {/* <Services /> */}
+          {/* <Projects /> */}
           <CTA />
         </motion.div>
       </motion.div>
